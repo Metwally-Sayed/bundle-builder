@@ -1,0 +1,89 @@
+/*
+ * Design tokens — derived from Figma screenshots of the Wyze Bundle Builder.
+ * All colors/radii/spacing centralized here. Components ONLY use var(--…).
+ * Figma file: Lm3R37HsO4uZ0RzNSRysGP  node: 68:8088
+ */
+
+:root {
+  /* ── Page ──────────────────────────────────────── */
+  --color-page-bg: #ffffff;
+  --color-panel-bg: #eaeefb;        /* periwinkle: open step + review panel */
+  --color-surface: #ffffff;         /* card background */
+  --color-surface-hover: #f7f8fe;
+
+  /* ── Brand / Accent ─────────────────────────────── */
+  --color-accent: #3b35cc;          /* buttons, badges, selected borders */
+  --color-accent-light: #ece9ff;    /* "Save X%" badge bg */
+  --color-accent-text: #3b35cc;     /* indigo price text */
+  --color-accent-foreground: #ffffff;
+  --color-accent-hover: #2e29a6;
+
+  /* ── Text ──────────────────────────────────────── */
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-eyebrow: #9ca3af;         /* STEP 1 OF 4, CAMERAS labels */
+
+  /* ── Price ──────────────────────────────────────── */
+  --color-price-active: #3b35cc;    /* indigo current price */
+  --color-price-compare: #ef4444;   /* red strikethrough price */
+  --color-price-free: #16a34a;      /* FREE text */
+  --color-savings: #16a34a;         /* green congrats/savings */
+
+  /* ── Border ──────────────────────────────────────── */
+  --color-border: #e5e7eb;
+  --color-border-card: #e5e7eb;
+  --color-border-selected: #3b35cc; /* indigo ring on selected card */
+  --color-variant-selected: #4E2FD2B2; /* selected variant chip border */
+
+  /* ── Stepper ──────────────────────────────────────── */
+  --color-stepper-btn-bg: #F1F1F4;  /* light-gray +/- squares */
+  --color-stepper-btn-hover: #E6E6EC;
+
+  /* ── Guarantee / Badge ──────────────────────────── */
+  --color-badge-bg: var(--color-accent);   /* solid indigo pill */
+  --color-badge-text: #ffffff;
+
+  /* ── Radii ──────────────────────────────────────── */
+  --radius-page: 0px;
+  --radius-panel: 16px;
+  --radius-card: 12px;
+  --radius-card-inner: 8px;
+  --radius-button: 8px;
+  --radius-badge: 6px;
+  --radius-chip: 6px;
+  --radius-stepper: 8px;
+  --radius-pill: 999px;
+
+  /* ── Shadows ──────────────────────────────────────── */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card-selected: 0 0 0 2px var(--color-border-selected);
+  --shadow-panel: 0 1px 3px rgba(0,0,0,0.08);
+
+  /* ── Spacing ──────────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ── Typography ──────────────────────────────────── */
+  --font-sans: "Gilroy", ui-sans-serif, system-ui, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ── Layout ──────────────────────────────────────── */
+  --layout-max-width: 1280px;
+  --layout-builder-width: 720px;
+  --layout-panel-width: 380px;
+  --layout-gap: 32px;
+
+  /* ── Transitions ──────────────────────────────────── */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
