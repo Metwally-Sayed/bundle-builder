@@ -32,7 +32,7 @@ export function BundleAccordion({
   return (
     /* No card wrapper — each step is a flat section separated by dividers */
     <div>
-      {data.steps.map((step, idx) => (
+      {data.steps.map((step) => (
         <div key={step.id} className={cn( step.id !== activeStepId && "border-b border-[#CED6DE]")}>
           <BundleStep
             step={step}

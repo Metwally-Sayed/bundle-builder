@@ -78,10 +78,10 @@ export function ReviewPanel({
       !compact && "sticky top-4 overflow-y-auto"
     )}>
       {/* <md (mobile) and desktop sidebar → stacked. md+ compact (tablet) → two columns. */}
-      <div className={cn(compact && "md:flex md:items-stretch")}>
+      <div className={cn(compact && "md:flex md:items-stretch ")}>
 
         {/* LEFT column: header + line items + shipping */}
-        <div className={cn(compact && "md: md:min-w-0")}>
+        <div className={cn("flex flex-col", compact && "md:md:min-w-0")}>
           {/* Header */}
           <div className="px-5 pt-5 pb-3">
             <p className="text-[var(--color-eyebrow)] text-[10px] font-semibold tracking-widest uppercase">
@@ -95,47 +95,50 @@ export function ReviewPanel({
             </p>
           </div>
 
-          {/* Line items */}
-          <div className="px-5 pb-3">
-            {isEmpty ? (
-              <p className="text-[var(--color-text-muted)] text-sm py-6 text-center">
-                Add products to build your system
-              </p>
-            ) : (
-              REVIEW_CATEGORIES.map((cat) => {
-                const items = selectedItems.filter((i) => i.product.reviewCategory === cat.id)
-                return (
-                  <ReviewGroup
-                    key={cat.id}
-                    title={cat.label}
-                    items={items}
-                    onIncrement={onIncrement}
-                    onDecrement={onDecrement}
-                    onToggle={onToggle}
-                  />
-                )
-              })
-            )}
+          {/* Line items — scrollable */}
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            <div className="px-5 pb-3">
+              {isEmpty ? (
+                <p className="text-[var(--color-text-muted)] text-sm py-6 text-center">
+                  Add products to build your system
+                </p>
+              ) : (
+                REVIEW_CATEGORIES.map((cat) => {
+                  const items = selectedItems.filter((i) => i.product.reviewCategory === cat.id)
+                  return (
+                    <ReviewGroup
+                      key={cat.id}
+                      title={cat.label}
+                      items={items}
+                      onIncrement={onIncrement}
+                      onDecrement={onDecrement}
+                      onToggle={onToggle}
+                    />
+                  )
+                })
+              )}
+            </div>
+
+             {/* Shipping FREE row — always visible */}
+          <div className="px-5">
+
+            <div className="flex items-center justify-between border-t border-[#CED6DE] md:py-[15px] pt-[15px]">
+              <div className="flex items-center gap-2.5 text-[13px] text-[var(--color-text-primary)]">
+                <span className="flex-shrink-0 w-10 h-10 rounded-md bg-white flex items-center justify-center">
+                  <img src="/icons/delivery.svg" alt="" width={20} height={20} className="w-5 h-5" />
+                </span>
+                Fast Shipping
+              </div>
+              <div className="text-right flex flex-col items-center">
+                <span className="text-[#6F7882] text-[13px] line-through mr-1.5">$5.99</span>
+                <span className="text-[#4E2FD2] text-[13px] font-semibold">FREE</span>
+              </div>
+            </div>
+
+          </div>
           </div>
 
-          {/* Shipping FREE row */}
-          <div className="px-5  ">
-
-            <div className="flex items-center justify-between border-t border-[#CED6DE] pt-[15px]">
-  <div className="flex items-center gap-2.5 text-[13px] text-[var(--color-text-primary)] ">
-              <span className="flex-shrink-0 w-10 h-10 rounded-md bg-white flex items-center justify-center">
-                <img src="/icons/delivery.svg" alt="" width={20} height={20} className="w-5 h-5" />
-              </span>
-              Fast Shipping
-            </div>
-            <div className="text-right flex flex-col items-center ">
-              <span className="text-[#6F7882] text-[13px] line-through mr-1.5">$5.99</span>
-              <span className="text-[#4E2FD2] text-[13px] font-semibold">FREE</span>
-            </div>
-            </div>
- 
          
-          </div>
         </div>
 
         {/* RIGHT column: seal + returns + price + congrats + CTA */}

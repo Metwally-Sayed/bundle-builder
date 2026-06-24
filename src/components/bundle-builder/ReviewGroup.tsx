@@ -17,7 +17,7 @@ export function ReviewGroup({ title, items, onIncrement, onDecrement, onToggle }
       <p className="text-[var(--color-eyebrow)] text-[10px] font-semibold tracking-widest uppercase mb-1 mt-3 first:mt-0">
         {title}
       </p>
-      <div className="divide-y divide-white/40">
+      <div>
         {items.map((item) => (
           <ReviewLineItem
             key={item.key}

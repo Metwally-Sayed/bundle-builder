@@ -1,32 +1,30 @@
-# React + TypeScript + Vite
+# Bundle Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Wyze security system bundle configurator — multi-step accordion with a sticky review panel.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + **TypeScript** + **Vite**
+- **Tailwind CSS v4** (via `@tailwindcss/vite`)
+- **Design tokens** in `src/styles/tokens.css` — all colors, radii, spacing, shadows as CSS custom properties derived from Figma. Components use `var(--…)` exclusively (no raw values).
+- **Gilroy** self-hosted in `public/fonts/` — commercial font not available on Google Fonts.
 
-## React Compiler
+## Decisions & Tradeoffs
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Decision | Rationale |
+|---|---|
+| Tailwind v4 `color-mix()` opacity | Tailwind replaced the v3 opacity modifier approach with `color-mix()`. This requires browser support for `color-mix(in oklab, …)`. Falls back to solid color on older browsers. |
+| Design tokens as CSS vars vs Tailwind theme | Keeps values visible in DevTools and decouples from Tailwind's config. Downside: Tailwind's arbitrary value syntax (`text-[var(--color-text)]`) is more verbose than a dedicated theme key. |
+| Self-hosted Gilroy `.ttf` | Gilroy isn't on Google Fonts. Using `.ttf` (not `.woff2`) — convert to woff2 for production to reduce bundle size. |
+| Flat accordion (no card wrapper) | Each step is a standalone section separated by dividers, matching the Wyze design. The open step has a panel background; closed steps just show the header. |
+| `selectedItems` filtering per category | Review groups filter the flat selected items array by `reviewCategory` at render time. This is simple but recalculates on every render; not a concern at this scale. |
+| Sticky review panel | `position: sticky` on desktop for the right panel. On compact layouts it reorganizes into a two-column (md+) or single-column layout. The `compact` prop adds several conditional classes — a responsive strategy (e.g. container queries) would be cleaner but isn't supported in all target browsers. |
+| No state library | All state is lifted to the root `BundleBuilder` component. Fine for a single-page configurator; would need extraction if steps became deeply nested. |
 
-## Expanding the Oxlint configuration
+## Development
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm run dev
+npm run build
+npm run lint
 ```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
